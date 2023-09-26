@@ -28,21 +28,25 @@ def process_line(file_line) -> str:
     return name, property_name
 
 
+def create_list(file_obj) ->list:
+    item_list = []
+    for line in file_obj:
+
+        if line == "*************\n":
+            break
+        if line[0] == '-':
+            name, property_name = process_line(line)
+            item_list.append(file_item(name, property_name)) 
+    
+    return item_list
+
+            
+
 
 file_name = "femMCinspo.txt"
 file = open(file_name)
 
-japan_list = []
-for line in file:
-    if line == "*************\n":
-        break
-
-    if line[0] == '-':
-        name, property_name = process_line(line)
-        japan_list.append(file_item(name, property_name))
+japan_list = create_list(file)
+west_list = create_list(file)
 
 
-        
-
-    
-    
