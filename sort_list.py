@@ -6,19 +6,28 @@ class file_items:
         self.property_name = property_name
 
 def process_line(file_line) -> str:
+    if file_line[:-1] == '\n':
+        file_line = file_line[:-1] #remove newline char
     file_line = file_line[2:]
     
-    index = 0
     name = ""
-    while file_line[index] != '(':
-        name = name + file_line[index]
-        index += 1
+    for ch in file_line:
+        if ch == '(':
+            break
+        name = name + ch
+        file_line = file_line[1:]
+    
+    file_line = file_line[1:]
+    file_line = file_line[:-1]
 
+    
+
+    '''
     propery_name = ""
     while file_line[index] != ')':
         propery_name = propery_name + file_line[index]
         index += 1
-        
+    '''
 
 
     return str
