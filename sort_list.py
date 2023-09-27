@@ -42,18 +42,28 @@ def create_list(file_obj) ->list:
     
     return item_list
 
+
 def sort_help(item_obj):
     return (item_obj.property_name, item_obj.name) #return tuple to allow for secondary sort
 
+
 def write_file(file, item_list):
     for item in item_list:
-        line = f"{item.name}({item.property_name})\n"
+        line = f"- {item.name}({item.property_name})\n"
         file.write(line)
            
             
 file_name = "femMCinspo.txt"
 
 file = open(file_name)
+
+#get first 3 lines of file
+first_lines = []
+for i in range(3):
+    temp = file.readline()
+    first_lines += [temp]
+
+#create two separate lists for the contents of file
 japan_list = create_list(file)
 west_list = create_list(file)
 file.close()
@@ -63,6 +73,10 @@ japan_list.sort(key=sort_help)
 west_list.sort(key=sort_help)
 
 file = open("sorted.txt", 'w')
+
+#write the first 3 lines into file
+for i in range(3):
+    file.write(first_lines[i])
 
 write_file(file, japan_list)
 file.write("*************\n")
